@@ -5,7 +5,7 @@ android {
         release {
             keyAlias 'testapp'
             keyPassword 'testapp'
-            storeFile file('C:/Users/Administrator/Desktop/AndroidDemo/AppKeystore.jks')
+            storeFile file('D:/appkeystore/AppKeystore.jks')
             storePassword 'appkeystore'
         }
     }
