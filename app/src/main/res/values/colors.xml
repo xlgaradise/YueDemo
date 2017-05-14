@@ -6,4 +6,6 @@
     <color name="red">#CC3300</color>
     <color name="white">#ffffff</color>
     <color name="_blue">#209e85</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#e0000000</color>
 </resources>

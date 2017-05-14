@@ -7,5 +7,4 @@ package com.hmxl.yuedemo.activities;
 public class Test {
 
     //liuli
-    //
 }
