@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         //获取输入的手机号,之前的phone是默认写死用来测试的.
          InputPhoneNumber =phoneNumber.getText().toString().trim() ;
 
+
         //格式判断，如果输入的手机号为空，或者格式不正确
 
             btn_check.setOnClickListener(new View.OnClickListener() {
