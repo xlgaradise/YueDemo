@@ -47,14 +47,16 @@
 
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.LoginActivity">
+
+        </activity>
+        <activity android:name=".activities.TestActivity" />
+        <activity android:name=".activities.All_fragmment_Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.TestActivity" />
-        <activity android:name=".activities.All_fragmment_Activity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

@@ -9,10 +9,10 @@ import android.widget.RadioGroup;
 import com.hmxl.yuedemo.R;
 
 public class All_fragmment_Activity extends AppCompatActivity {
-    private Fragment_A fragment_a;
-    private Fragment_B fragment_b;
-    private Fragment_C fragment_c;
-    private Fragment_D fragment_d;
+    private CommunityFragment _communityFragment;
+    private MessageFragment messageFragment_;
+    private FindFragment findFragment_;
+    private MineFragment mineFragment_;
     private RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,24 +20,24 @@ public class All_fragmment_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_all_fragmment);
 
         radioGroup = (RadioGroup) findViewById(R.id.radiogruop);
-        fragment_a = new Fragment_A();
-        fragment_b = new Fragment_B();
-        fragment_c = new Fragment_C();
-        fragment_d = new Fragment_D();
+        _communityFragment = new CommunityFragment();
+        messageFragment_ = new MessageFragment();
+        findFragment_ = new FindFragment();
+        mineFragment_ = new MineFragment();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft= fm.beginTransaction();
-                if (checkedId==R.id.rd_date){
-                    ft.replace(R.id.fg_container,fragment_a);
+                if (checkedId==R.id.rd_community){
+                    ft.replace(R.id.fg_container, _communityFragment);
                 }else if (checkedId==R.id.rd_message){
-                    ft.replace(R.id.fg_container,fragment_b);
+                    ft.replace(R.id.fg_container, messageFragment_);
                 } else if (checkedId==R.id.rd_find){
-                    ft.replace(R.id.fg_container,fragment_c);
+                    ft.replace(R.id.fg_container, findFragment_);
                 }else{
-                    ft.replace(R.id.fg_container,fragment_d);
+                    ft.replace(R.id.fg_container, mineFragment_);
                 }
                 ft.commit();
             }
