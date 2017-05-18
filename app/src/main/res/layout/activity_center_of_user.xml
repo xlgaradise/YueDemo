@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_center_of_user"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cccccc"
+    android:orientation="vertical"
+    tools:context="com.hmxl.yuedemo.activities.CenterOfUserActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:id="@+id/ll_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/my_iv_image"
+                android:layout_margin="10sp"
+                android:background="@mipmap/ic_launcher"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_tv_name"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15dp"
+                    android:text="昵称"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/my_tv_identification"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15dp"
+                    android:text="唯一标识"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/my_iv_piture"
+                android:layout_margin="20sp"
+                android:background="@drawable/center_icon_album"
+                android:layout_width="18dp"
+                android:layout_height="18dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_tv_compile"
+                    android:layout_marginTop="18dp"
+                    android:textSize="15dp"
+                    android:text="编辑资料"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/my_iv_dressup"
+                android:layout_margin="15sp"
+                android:background="@drawable/center_icon_collect"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_tv_collect"
+                    android:layout_marginTop="15sp"
+                    android:textSize="15dp"
+                    android:text="个性装扮"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/my_iv_expression"
+                android:layout_margin="15sp"
+                android:background="@drawable/center_icon_expresion"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_tv_manage"
+                    android:layout_marginTop="15sp"
+                    android:textSize="15dp"
+                    android:text="好友管理"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/my_iv_set"
+                android:layout_margin="15sp"
+                android:background="@drawable/center_icon_set"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_tv_systemset"
+                    android:layout_marginTop="15sp"
+                    android:textSize="15dp"
+                    android:text="系统设置"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
+
+

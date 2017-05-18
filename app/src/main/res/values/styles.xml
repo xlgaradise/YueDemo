@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="My_btn_style">
+        <item name="android:background">#cc6666</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffd</item>
+    </style>
+
+
 </resources>

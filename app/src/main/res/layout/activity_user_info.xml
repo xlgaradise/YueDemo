@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cccccc"
+    android:orientation="vertical"
+    tools:context="com.hmxl.yuedemo.activities.UserInfoActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/ll_compile"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/my_iv_change_image"
+            android:layout_margin="10dp"
+            android:background="@mipmap/ic_launcher"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/my_tv_compile_name"
+                android:textSize="15dp"
+                android:hint="昵称"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/my_tv_compile_identification"
+                android:textSize="15dp"
+                android:hint="唯一标识"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lv_user_sex"
+            android:layout_margin="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:text="性别"
+            android:textSize="15dp"
+            android:layout_width="80dp"
+            android:layout_height="25dp">
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_margin="3dp"
+                android:text="男"
+                android:checked="true"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rb_female"
+                android:layout_margin="3dp"
+                android:text="女"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lv_user_age"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:text="年龄"
+            android:textSize="15dp"
+            android:paddingTop="5dp"
+            android:layout_width="80dp"
+            android:layout_height="25dp">
+        </TextView>
+
+        <EditText
+            android:hint="22"
+            android:textSize="15dp"
+            android:layout_margin="3dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lv_user_region"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:text="地区"
+            android:textSize="15dp"
+            android:paddingTop="5dp"
+            android:layout_width="80dp"
+            android:layout_height="25dp">
+        </TextView>
+
+        <EditText
+            android:hint="河南省"
+            android:textSize="15dp"
+            android:layout_margin="3dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lv_user_introduction"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:text="个人简介"
+            android:textSize="15dp"
+            android:paddingTop="5dp"
+            android:layout_width="100dp"
+            android:layout_height="25dp">
+        </TextView>
+
+        <EditText
+            android:layout_margin="3dp"
+            android:textSize="15dp"
+            android:hint="好好学习，天天向上"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_info_change"
+        android:layout_gravity="center_horizontal"
+        android:background="#cc6666"
+        android:text="确认修改"
+        android:textSize="20dp"
+        android:textColor="#ffd"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp" />
+
+</LinearLayout>
