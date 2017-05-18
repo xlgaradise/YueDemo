@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_window">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_card_avatar"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_avatar"/>
+            <TextView
+                android:id="@+id/tv_card_id"
+                android:layout_toRightOf="@id/iv_card_avatar"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="ID："/>
+            <TextView
+                android:id="@+id/tv_card_name"
+                android:layout_alignLeft="@id/tv_card_id"
+                android:layout_below="@id/tv_card_id"
+                android:layout_marginTop="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="昵称："/>
+            <TextView
+                android:id="@+id/tv_card_more"
+                android:layout_alignLeft="@id/tv_card_id"
+                android:layout_below="@id/tv_card_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="查看详细信息"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_button"
+                android:text="发起聊天"/>
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_button"
+                android:text="加为好友"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>

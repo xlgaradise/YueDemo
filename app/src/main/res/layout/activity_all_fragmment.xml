@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/fg_container"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+    <RadioGroup
+        android:id="@+id/radiogruop"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <RadioButton
+            android:id="@+id/rd_community"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="最近联系人"
+            android:drawableTop="@drawable/seletcor_rdbtn_community"
+            android:textColor="@drawable/selector_txt_color"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rd_message"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="通讯录"
+            android:drawableTop="@drawable/seletcor_rdbtn_message"
+            android:textColor="@drawable/selector_txt_color"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rd_find"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="发现"
+            android:textColor="@drawable/selector_txt_color"
+            android:drawableTop="@drawable/seletcor_rdbtn_find"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rd_mine"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="个人中心"
+            android:drawableTop="@drawable/seletcor_rdbtn_mine"
+            android:textColor="@drawable/selector_txt_color"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+</LinearLayout>
