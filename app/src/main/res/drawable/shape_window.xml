@@ -5,18 +5,18 @@
     <corners android:radius="20dp"></corners>
     <stroke
         android:width="1px"
-        android:color="@color/_blue"
+        android:color="@color/colorGreenDark"
         android:dashWidth="4px"
         ></stroke>
     <!--<gradient-->
         <!--android:angle="270"-->
-        <!--android:centerColor="#00FFFF"-->
+        <!--android:centerColor="#CCFFCC"-->
         <!--android:centerX="0.5"-->
         <!--android:centerY="0.5"-->
-        <!--android:endColor="#666666"-->
-        <!--android:startColor="#0099FF" />-->
+        <!--android:endColor="#CCFF99"-->
+        <!--android:startColor="#CCFFFF" />-->
 
-    <solid android:color="#efffffff"></solid>
+    <solid android:color="@color/green"></solid>
 
 
 </shape>

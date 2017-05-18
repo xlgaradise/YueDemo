@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_check;
     private EditText phoneNumber;
     private EditText check_code;
+    private RadioButton login_us;
     String InputPhoneNumber; //获取输入手机号
     String InputCheckCode;//获取输入验证码
 
@@ -31,16 +33,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         //密钥
         SMSSDK.initSDK(this, "1dcd0bf3f2441", "80c0045ba4080a8ac0d131e165d703fe");
         //注册回掉
         SMSSDK.registerEventHandler(eventHandler);
-        btn_login = (Button) findViewById(R.id.login);
-        email_register = (TextView) findViewById(R.id.email_register);
+        btn_login = (Button) findViewById(R.id.log_phone_login);
+        email_register = (TextView) findViewById(R.id.log_phone_btn_register);
         btn_check = (Button) findViewById(R.id.getCheckNumber);
-        phoneNumber = (EditText)findViewById(R.id.phoneNumber);
-        check_code = (EditText) findViewById(R.id.check_code);
+        phoneNumber = (EditText)findViewById(R.id.log_phone_et_number);
+        check_code = (EditText) findViewById(R.id.log_phone_et_code);
+        login_us = (RadioButton) findViewById(R.id.log_phone_rbtn_us);
 
         //获取输入的手机号,之前的phone是默认写死用来测试的.
          InputPhoneNumber =phoneNumber.getText().toString().trim() ;
@@ -77,8 +80,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Todo 跳转到注册界面
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
+
+        login_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到账号登陆界面
+                Intent intent = new Intent(LoginActivity.this,LoginUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
     }
     private EventHandler eventHandler = new EventHandler() {
