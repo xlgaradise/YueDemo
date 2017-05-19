@@ -92,10 +92,11 @@
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:text="退出登录"
+        android:background="@drawable/shape_center_button"
         style="@style/My_btn_style"
         android:layout_alignParentBottom="true"
         android:layout_width="300dp"
-        android:layout_height="45dp" />
+        android:layout_height="40dp" />
 
 
 </LinearLayout>

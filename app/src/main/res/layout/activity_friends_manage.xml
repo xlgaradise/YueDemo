@@ -28,7 +28,7 @@
 
         <Button
             android:id="@+id/btn_manage_delete"
-            android:background="#cc6666"
+            android:background="@drawable/shape_center_button"
             android:text="删除"
             android:textSize="16dp"
             android:textColor="#ffd"

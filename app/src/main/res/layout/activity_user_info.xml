@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="15dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -53,7 +53,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="15dp" />
 
 
     <LinearLayout
@@ -67,10 +67,11 @@
             android:layout_margin="10dp"
             android:paddingLeft="5dp"
             android:paddingTop="8dp"
+            android:gravity="center|left"
             android:text="性别"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:layout_width="80dp"
-            android:layout_height="25dp">
+            android:layout_height="35dp">
         </TextView>
 
         <RadioGroup
@@ -115,11 +116,12 @@
             android:id="@+id/lv_user_age"
             android:layout_margin="5dp"
             android:paddingLeft="10dp"
+            android:gravity="center|left"
             android:text="年龄"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:paddingTop="5dp"
             android:layout_width="80dp"
-            android:layout_height="25dp">
+            android:layout_height="40dp">
         </TextView>
 
         <EditText
@@ -147,11 +149,12 @@
             android:id="@+id/lv_user_region"
             android:layout_margin="5dp"
             android:paddingLeft="10dp"
+            android:gravity="center|left"
             android:text="地区"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:paddingTop="5dp"
             android:layout_width="80dp"
-            android:layout_height="25dp">
+            android:layout_height="40dp">
         </TextView>
 
         <EditText
@@ -180,11 +183,12 @@
             android:id="@+id/lv_user_introduction"
             android:layout_margin="5dp"
             android:paddingLeft="10dp"
+            android:gravity="center|left"
             android:text="个人简介"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:paddingTop="5dp"
             android:layout_width="100dp"
-            android:layout_height="25dp">
+            android:layout_height="43dp">
         </TextView>
 
         <EditText
@@ -203,7 +207,7 @@
     <Button
         android:id="@+id/btn_info_change"
         android:layout_gravity="center_horizontal"
-        android:background="#cc6666"
+        android:background="@drawable/shape_center_button"
         android:text="确认修改"
         android:textSize="20dp"
         android:textColor="#ffd"
