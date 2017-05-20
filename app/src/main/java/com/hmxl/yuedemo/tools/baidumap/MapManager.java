@@ -3,8 +3,7 @@ package com.hmxl.yuedemo.tools.baidumap;
 
 import android.os.Bundle;
 
-import com.baidu.mapapi.model.LatLng;
-import com.hmxl.yuedemo.activities.MapFragment;
+import com.hmxl.yuedemo.fragment.MapFragment;
 
 /**
  * Created by HPC on 2017/5/11.

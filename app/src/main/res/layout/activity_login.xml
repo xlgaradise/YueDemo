@@ -10,7 +10,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:orientation="vertical"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <!--欢迎部分-->
@@ -37,11 +37,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:background="@drawable/biz_icon_phone"
+                    android:background="@drawable/biz_icon_signup_phone"
                     android:layout_width="30dp"
                     android:layout_height="40dp" />
                 <EditText
-                    android:id="@+id/log_phone_et_number"
+                    android:id="@+id/et_number"
                     android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/log_phone_et_code"
+                        android:id="@+id/et_checkcode"
                         android:layout_toRightOf="@+id/imageview"
                         android:layout_marginLeft="15dp"
                         android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                         android:background="@drawable/shape_login_et"/>
 
                     <Button
-                        android:id="@+id/getCheckNumber"
+                        android:id="@+id/btn_Code"
                         android:layout_marginTop="-5dp"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -89,14 +89,14 @@
                 android:layout_height="100dp">
                 <Button
                     android:background="@drawable/btn_shape"
-                    android:id="@+id/log_phone_login"
+                    android:id="@+id/btn_login"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     style="@style/btn_text"
                     android:text="登陆"/>
 
                 <Button
-                    android:id="@+id/log_phone_btn_register"
+                    android:id="@+id/btn_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -108,7 +108,6 @@
         </LinearLayout>
             <!-- 这个是底部的第三方登录布局-->
             <TextView
-                android:paddingTop="40dp"
                 android:paddingBottom="20dp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -119,6 +118,7 @@
             <RadioGroup
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:orientation="horizontal">

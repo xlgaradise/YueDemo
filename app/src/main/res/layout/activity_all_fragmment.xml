@@ -2,6 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    //Head
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000000">
+        <TextView
+            android:layout_width="340dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Let's Date!"
+            android:textSize="25sp"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_gravity="right"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/tg"/>
+    </FrameLayout>
+
+
     <FrameLayout
         android:id="@+id/fg_container"
         android:layout_weight="1"
@@ -12,7 +36,8 @@
         android:id="@+id/radiogruop"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="70dp"
+        android:background="@drawable/shape_rdbtn">
         <RadioButton
             android:id="@+id/rd_community"
             android:gravity="center_horizontal"

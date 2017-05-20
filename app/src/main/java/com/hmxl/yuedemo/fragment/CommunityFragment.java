@@ -1,4 +1,4 @@
-package com.hmxl.yuedemo.activities;
+package com.hmxl.yuedemo.fragment;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.hmxl.yuedemo.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MineFragment extends Fragment {
+public class CommunityFragment extends Fragment {
 
 
-    public MineFragment() {
+    public CommunityFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+        return inflater.inflate(R.layout.fragment_community, container, false);
     }
 
 }

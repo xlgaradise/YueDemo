@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.widget.RadioGroup;
 
 import com.hmxl.yuedemo.R;
+import com.hmxl.yuedemo.fragment.CommunityFragment;
+import com.hmxl.yuedemo.fragment.FindFragment;
+import com.hmxl.yuedemo.fragment.MessageFragment;
+import com.hmxl.yuedemo.fragment.MineFragment;
 
 public class All_fragmment_Activity extends AppCompatActivity {
     private CommunityFragment _communityFragment;

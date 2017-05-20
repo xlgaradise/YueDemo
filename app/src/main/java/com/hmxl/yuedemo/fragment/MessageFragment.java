@@ -1,4 +1,4 @@
-package com.hmxl.yuedemo.activities;
+package com.hmxl.yuedemo.fragment;
 
 
 import android.os.Bundle;

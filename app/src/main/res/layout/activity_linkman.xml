@@ -4,8 +4,7 @@
     android:id="@+id/activity_linkman"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.hmxl.yuedemo.activities.LinkmanActivity">
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/lv_LinkmanList"
