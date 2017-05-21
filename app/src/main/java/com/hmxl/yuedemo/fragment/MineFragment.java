@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,12 @@ import com.hmxl.yuedemo.activities.AvatarActivity;
 import com.hmxl.yuedemo.activities.FriendManagerActivity;
 import com.hmxl.yuedemo.activities.SelfEditActivity;
 import com.hmxl.yuedemo.activities.SettingActivity;
+import com.hmxl.yuedemo.bean.User;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +36,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView tv_friend_manager;
     private TextView tv_edit;
     private TextView tv_collect;
+    private TextView my_tv_name;
     public MineFragment() {
         // Required empty public constructor
     }
@@ -50,6 +59,24 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         tv_friend_manager.setOnClickListener(this);
         imageView.setOnClickListener(this);
         tv_collect.setOnClickListener(this);
+        my_tv_name = (TextView) view.findViewById(R.id.my_tv_name);
+
+         String objectId = BmobUser.getCurrentUser().getObjectId();
+        //通过objectId获取到user的全部信息
+        BmobQuery<User> query = new BmobQuery<User>();
+        query.getObject(objectId, new QueryListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if(e==null){
+                    //获得playerName的信息
+                    my_tv_name.setText(user.getRemark());
+                }else{
+                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                }
+            }
+
+        });
+
 
 
         return  view;
@@ -62,6 +89,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             // 系统设置
              Intent intent = new Intent(getActivity(), SettingActivity.class);
              startActivity(intent);
+
         }else if(v.getId() == R.id.my_tv_compile){
             //编辑资料
             Intent intent = new Intent(getActivity(), SelfEditActivity.class);

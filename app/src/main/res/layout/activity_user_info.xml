@@ -31,30 +31,26 @@
             android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <EditText
-                android:id="@+id/my_tv_compile_name"
+                android:layout_marginTop="25dp"
+                android:id="@+id/my_tv_nickname"
                 android:textSize="15dp"
                 android:hint="昵称"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                android:id="@+id/my_tv_compile_identification"
+                android:text="唯一标识"
+                android:id="@+id/unique"
                 android:textSize="15dp"
-                android:hint="唯一标识"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
-
-
     </LinearLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="15dp" />
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:background="#ffffff"
@@ -112,7 +108,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/lv_user_age"
             android:layout_margin="5dp"
             android:paddingLeft="10dp"
             android:gravity="center|left"
@@ -124,6 +119,8 @@
         </TextView>
 
         <EditText
+            android:inputType="number"
+            android:id="@+id/et_user_age"
             android:hint="22"
             android:textSize="15dp"
             android:layout_margin="3dp"
@@ -145,7 +142,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/lv_user_region"
             android:layout_margin="5dp"
             android:paddingLeft="10dp"
             android:gravity="center|left"
@@ -157,6 +153,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/lv_user_region"
             android:hint="河南省"
             android:textSize="15dp"
             android:layout_margin="3dp"
@@ -191,6 +188,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/et_introduction"
             android:layout_margin="3dp"
             android:textSize="15dp"
             android:hint="好好学习，天天向上"
@@ -198,10 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/btn_info_change"

@@ -18,6 +18,8 @@ import com.hmxl.yuedemo.adapter.MyViewPagerAdapter;
 
 import java.util.ArrayList;
 
+import cn.bmob.v3.BmobUser;
+
 import static com.hmxl.yuedemo.activities.ApplicationDemo.SHAREDPREFERENCE_NAME;
 
 public class GuideActivity extends AppCompatActivity {
@@ -43,9 +45,16 @@ public class GuideActivity extends AppCompatActivity {
             saveState();
         }else{
             isFirstIn = false;
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
+            BmobUser user = BmobUser.getCurrentUser();
+            if(user == null){
+                Intent intent = new Intent(this, WelcomeActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(this, All_fragmment_Activity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
     }

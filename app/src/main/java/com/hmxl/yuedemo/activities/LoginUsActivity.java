@@ -3,6 +3,7 @@ package com.hmxl.yuedemo.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,17 +22,24 @@ public class LoginUsActivity extends AppCompatActivity {
     private Button btn_phone;
     private EditText et_account;
     private EditText et_pwd;
+    private boolean isLoginOut = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_us);
 
+        Intent intent = getIntent();
+        int where = intent.getIntExtra("where",1);
+        if(where == SettingActivity.LoginOut){
+            isLoginOut = true;
+        }
+
         //初试化
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser!=null){
-            Intent intent = new Intent(LoginUsActivity.this,All_fragmment_Activity.class);
-            startActivity(intent);
+            Intent intent1 = new Intent(LoginUsActivity.this,All_fragmment_Activity.class);
+            startActivity(intent1);
             finish();
         }
         btn_login = (Button) findViewById(R.id.log_pwd_btn_login);
@@ -76,5 +84,15 @@ public class LoginUsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(isLoginOut)
+                System.exit(0);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
