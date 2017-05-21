@@ -45,7 +45,6 @@ public class RequestInfoActivity extends AppCompatActivity {
     String  current_time;
     String    date_time;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +67,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         data_list.add("吃个饭喽");
         data_list.add("爬山吧");
         data_list.add("一起旅游吧");
-        data_list.add("一起旅游吧");
         data_list.add("其他");
-
 
 
        //适配器
@@ -94,8 +91,6 @@ public class RequestInfoActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         //spinner2
         spinner2 = (Spinner) findViewById(R.id.spinner2);
