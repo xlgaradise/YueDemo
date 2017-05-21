@@ -62,6 +62,7 @@
                 android:layout_height="wrap_content" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_weight="7"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
@@ -69,20 +70,20 @@
                 <RadioButton
                     android:layout_weight="1"
                     android:text="不限"
-                    android:id="@+id/none"
+                    android:id="@+id/nosex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:layout_weight="1"
                     android:text="他"
-                    android:id="@+id/female"
+                    android:id="@+id/male"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <RadioButton
                     android:layout_weight="1"
                     android:text="她"
-                    android:id="@+id/male"
+                    android:id="@+id/female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -105,8 +106,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tv_current_time"
                 android:layout_weight="7"
-                android:text="2017-5-19"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
@@ -156,8 +157,8 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_date_time"
                 android:layout_weight="7"
-                android:text="2017-5-24"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -167,6 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/et_remark"
                 android:gravity="center"
                 android:hint="备注信息"
                 android:background="@drawable/shape_outline"
@@ -176,13 +178,13 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-
+        android:id="@+id/btn_submit"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="提交"
         android:textColor="@color/white"
-        android:background="@color/green_shanbei"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
