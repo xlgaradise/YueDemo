@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:gravity="center"
+        android:text="请填写详细信息"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:id="@+id/linear_1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="4"
+                android:text="约会类型"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:layout_weight="7"
+                android:id="@+id/spinner"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:dropDownSelector="@color/blue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="4"
+
+                android:text="选择性别"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:layout_weight="1"
+                    android:text="不限"
+                    android:id="@+id/nosex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:layout_weight="1"
+                    android:text="他"
+                    android:id="@+id/male"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:layout_weight="1"
+                    android:text="她"
+                    android:id="@+id/female"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="4"
+                android:text="当前时间"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_current_time"
+                android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="3"
+                android:text="延期天数"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner2"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:dropDownSelector="@color/blue"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.AppCompatSpinner>
+            <TextView
+                android:layout_weight="2"
+                android:text="日"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="4"
+                android:text="约会日期"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/et_remark"
+                android:gravity="center"
+                android:hint="备注信息"
+                android:background="@drawable/shape_outline"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</RelativeLayout>
