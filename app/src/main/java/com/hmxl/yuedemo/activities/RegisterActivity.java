@@ -10,12 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hmxl.yuedemo.R;
+import com.hmxl.yuedemo.tools.exception.MyLog;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
 public class RegisterActivity extends AppCompatActivity {
+    private static String TAG = "RegisterActivity";
 
     private Button btn_reg;
     private Button btn_phone;
@@ -32,9 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
         et_email = (EditText) findViewById(R.id.et_email);
         et_pwd = (EditText) findViewById(R.id.et_pwd);
         et_pwd_again = (EditText) findViewById(R.id.et_pwd_again);
-
-
-
 
         btn_reg = (Button) findViewById(R.id.reg_btn_register);
         btn_phone = (Button) findViewById(R.id.reg_btn_phone);
@@ -56,18 +55,18 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void done(BmobUser bmobUser, BmobException e) {
                             if (e==null){
-                                Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this,All_fragmment_Activity.class);
                                 startActivity(intent);
                                 finish();
                             }else {
-                                Log.e("register error",e.getMessage().toString());
+                                MyLog.e(TAG,"register failure",e);
 
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(RegisterActivity.this,"两次输入密码不一致",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -77,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

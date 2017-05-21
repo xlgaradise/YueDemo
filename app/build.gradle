@@ -29,8 +29,9 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     sourceSets {
-        main.jniLibs.srcDirs = ['libs']
+        main.jniLibs.srcDirs = ['libs'];
     }
 
     /**
@@ -39,14 +40,19 @@ android {
     packagingOptions{
         exclude 'META-INF/rxjava.properties'
     }
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
 }
 
 repositories{
     flatDir{
-        dirs 'libs'
+        dirs  'libs'
+
     }
 }
-
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -57,22 +63,29 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
 
+    compile files('libs/android-logging-log4j-1.0.3.jar')
+    compile files('libs/log4j-1.2.17.jar')
     compile files('libs/BaiduLBS_Android.jar')
-//compile files('libs/android-logging-log4j-1.0.3.jar')
 
 
+    //以下苗乐飞使用
 
     //以下SDK开发者请根据需要自行选择
     //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
     //3.5.5：请务必查看下面注释[1]
+
     //bmob-push：Bmob的推送包
     //compile 'cn.bmob.android:bmob-push:0.8'
+
     //bmob-im：Bmob的即时通讯包，注意每个版本的im依赖特定版本的bmob-sdk，具体的依赖关系可查看下面注释[2]
     //bmob-im：特定版本的bmob-im依赖特定版本的bmob-sdk
     compile 'cn.bmob.android:bmob-im:2.0.6@aar'
     compile 'cn.bmob.android:bmob-sdk:3.5.5'
+
+
     //bmob-sms ：Bmob单独为短信服务提供的包
     //compile 'cn.bmob.android:bmob-sms:1.0.1'
+
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     //compile 'cn.bmob.android:http-legacy:1.0'
     //compile 'com.android.support.test.espresso:espresso-core:2.2.2'

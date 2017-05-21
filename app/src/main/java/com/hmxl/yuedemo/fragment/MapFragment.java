@@ -13,31 +13,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.hmxl.yuedemo.R;
+import com.hmxl.yuedemo.bean.UserMarker;
 import com.hmxl.yuedemo.tools.baidumap.LocationManager;
+import com.hmxl.yuedemo.tools.baidumap.MapManager;
+
+import java.util.ArrayList;
 
 /**
  * Created by HPC on 2017/5/5.
  */
 
-public class MapFragment extends Fragment implements SensorEventListener {
+public class MapFragment extends Fragment {
 
-    LatLng point = null;
+    View parentView = null;
+    Handler handler;
+
     MapView mapView = null;
     BaiduMap baiduMap;
-    View parentView = null;
+
     ImageButton btn_location = null;
     MyLocationData locationData;
-    private SensorManager mSensorManager;
+    SensorManager mSensorManager;
+    SensorEventListener sensorEventListener;
+
     boolean isRequestLocation = false;
     double lastX = 0.0;
 
@@ -54,24 +64,59 @@ public class MapFragment extends Fragment implements SensorEventListener {
         setMapOptions();
     }
 
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            locationData = (MyLocationData) msg.obj;
-            updateMap(locationData);
-        }
-    };
+
+    /**
+     * 初始化地图视图
+     */
     private void initView(){
+        //传感器
         mSensorManager = (SensorManager) parentView.getContext().getSystemService(Context.SENSOR_SERVICE);//获取传感器管理服务
+        sensorEventListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                if(locationData == null) return;
+                double x = sensorEvent.values[SensorManager.DATA_X];
+                if (Math.abs(x - lastX) > 1.0) {
+                    int direction = (int) x;
+                    MyLocationData date = new MyLocationData.Builder()
+                            .accuracy(locationData.accuracy)
+                            // 此处设置开发者获取到的方向信息，顺时针0-360
+                            .direction(direction).latitude(locationData.latitude)
+                            .longitude(locationData.longitude).build();
+                    baiduMap.setMyLocationData(date);
+                }
+                lastX = x;
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        };
+
+        //map 地图
         mapView = (MapView) parentView.findViewById(R.id.mapView);
         baiduMap = mapView.getMap();
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){//success
+                    locationData = (MyLocationData) msg.obj;
+                    //System.out.println(locationData.latitude+","+locationData.longitude);
+                    updateMap(locationData);
+                }else{
+                    Toast.makeText(parentView.getContext(),"获取定位失败！",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
         btn_location = (ImageButton) parentView.findViewById(R.id.btn_location);
-        btn_location.setImageResource(R.drawable.ico_map_location_normal);
+        btn_location.setImageResource(R.drawable.icon_map_location_normal);
         btn_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn_location.setImageResource(R.drawable.ico_map_location_normal);
-                LocationManager.getInstance(null).requestLocation(handler);
+                btn_location.setImageResource(R.drawable.icon_map_location_normal);
+                LocationManager.getInstance().requestLocation(handler);
                 isRequestLocation = true;
             }
         });
@@ -83,7 +128,7 @@ public class MapFragment extends Fragment implements SensorEventListener {
                     isRequestLocation = false;
                     return;
                 }
-                btn_location.setImageResource(R.drawable.ico_map_location);
+                btn_location.setImageResource(R.drawable.icon_map_location);
             }
             @Override
             public void onMapStatusChange(MapStatus mapStatus) {
@@ -94,14 +139,33 @@ public class MapFragment extends Fragment implements SensorEventListener {
 
             }
         });
+
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                ArrayList<UserMarker> userMarkers = MapManager.getInstance().getUserMarkersList();
+                for(UserMarker userMarker:userMarkers){
+                    if(marker == userMarker.marker){
+//                        Toast.makeText(parentView.getContext(),
+//                                userMarker.getUserID()+"",Toast.LENGTH_SHORT).show();
+                        MapManager.getInstance().showMarkPopupWindow(parentView,userMarker);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
+    /**
+     * 设置地图初始化参数
+     */
     private void setMapOptions(){
         Bundle bundle = getArguments();
         //默认天安门
         Double latitude = bundle.getDouble("latitude",39.945);
         Double longitude = bundle.getDouble("longitude",116.404);
-        point = new LatLng(latitude,longitude);
+        LatLng point = new LatLng(latitude,longitude);
 
         //显示指南针，不显示缩放控件
         UiSettings uiSettings = baiduMap.getUiSettings();
@@ -119,11 +183,11 @@ public class MapFragment extends Fragment implements SensorEventListener {
         baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 
-    public MapView getMapView(){
-        return mapView;
-    }
 
-
+    /**
+     * 更新地图
+     * @param locationData
+     */
     public void updateMap(MyLocationData locationData){
         baiduMap.setMyLocationData(locationData);
         MapStatus.Builder builder = new MapStatus.Builder();
@@ -131,12 +195,33 @@ public class MapFragment extends Fragment implements SensorEventListener {
                 .zoom(17.5f);
         baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
+
+    /**
+     * 显示marks图标
+     * @param userMarkers
+     */
+    public void showMarks(ArrayList<UserMarker> userMarkers){
+        Marker marker;
+        baiduMap.clear();
+        for(UserMarker userMarker: userMarkers){
+            marker = (Marker) (baiduMap.addOverlay(userMarker.getMarkerOption()));
+            userMarker.marker = marker;
+        }
+    }
+
+    /**
+     * 清除marks图标
+     */
+    public void clearMarks(){
+        baiduMap.clear();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
         //为系统的方向传感器注册监听器
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_UI);
     }
 
@@ -149,7 +234,7 @@ public class MapFragment extends Fragment implements SensorEventListener {
     @Override
     public void onStop() {
         //取消注册传感器监听
-        mSensorManager.unregisterListener(this);
+        mSensorManager.unregisterListener(sensorEventListener);
         super.onStop();
     }
 
@@ -158,26 +243,5 @@ public class MapFragment extends Fragment implements SensorEventListener {
         super.onDestroyView();
         baiduMap.setMyLocationEnabled(false);
         mapView.onDestroy();
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        if(locationData == null) return;
-        double x = sensorEvent.values[SensorManager.DATA_X];
-        if (Math.abs(x - lastX) > 1.0) {
-           int direction = (int) x;
-            MyLocationData date = new MyLocationData.Builder()
-                    .accuracy(locationData.accuracy)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(direction).latitude(locationData.latitude)
-                    .longitude(locationData.longitude).build();
-            baiduMap.setMyLocationData(date);
-        }
-        lastX = x;
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
     }
 }

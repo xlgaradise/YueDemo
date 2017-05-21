@@ -32,11 +32,14 @@ public class LocationManager {
         isRequested = false;
     }
 
-    public static LocationManager getInstance(Context context){
+    public static LocationManager getInstance(){
+        return  locationManager;
+    }
+
+    public static void initialize(Context context){
         if(locationManager == null){
             locationManager = new LocationManager(context);
         }
-        return  locationManager;
     }
 
     /**
@@ -113,16 +116,31 @@ public class LocationManager {
         @Override
         public void onReceiveLocation(BDLocation location) {
             //Receive Location
-            if(location == null || !isRequested) return;
+            if(!isRequested) return;
             isRequested = false;
-            locationData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    //.direction(mCurrentDirection)
-                    .latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            if(hd != null){
+            if(location != null){
+                int type = location.getLocType();
+                if (type == 61 || type == 161) {//success
+                    locationData = new MyLocationData.Builder()
+                            .accuracy(location.getRadius())
+                            // 此处设置开发者获取到的方向信息，顺时针0-360
+                            //.direction(mCurrentDirection)
+                            .latitude(location.getLatitude())
+                            .longitude(location.getLongitude()).build();
+                    if (hd != null) {
+                        Message m = Message.obtain();
+                        m.what = 1;
+                        m.obj = locationData;
+                        hd.sendMessage(m);
+                        hd = null;
+                    }
+                    return;
+                }
+            }
+            locationData = null;
+            if (hd != null) {
                 Message m = Message.obtain();
+                m.what = 0;
                 m.obj = locationData;
                 hd.sendMessage(m);
                 hd = null;
