@@ -12,12 +12,13 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/menu1"
+            android:id="@+id/btn_function_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/a1o"
+            android:background="@drawable/btn_function"
             android:gravity="center"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:text="展示结果"/>
     </LinearLayout>
 
     <LinearLayout
@@ -28,11 +29,13 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/menu2"
+            android:id="@+id/btn_function_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/a1o"
-            android:gravity="center" />
+            android:background="@drawable/btn_function"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="清除结果"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,27 +46,30 @@
         android:layout_marginTop="10dp" >
 
         <Button
-            android:id="@+id/menu3"
+            android:id="@+id/btn_function_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/a1o"
-            android:gravity="center" />
+            android:background="@drawable/btn_function"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="刷新结果"/>
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp" >
 
         <Button
-            android:id="@+id/menu4"
+            android:id="@+id/btn_function_clearInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/a1o"
-            android:gravity="center"/>
+            android:background="@drawable/btn_function"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="清除信息"/>
     </LinearLayout>
 
 </LinearLayout>

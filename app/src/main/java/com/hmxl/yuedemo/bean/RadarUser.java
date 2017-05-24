@@ -13,8 +13,18 @@ public class RadarUser {
     public RadarRequsetOption requsetOption;
     public RadarUser(){
         id = "nullUser";
-        name = "";
+        name = "nullname";
         sex = User.Sex.female;
         requsetOption = new RadarRequsetOption();
+    }
+
+    public  String toString(){
+        String str = "nullstr";
+        str = "id:"+id+",name:"+name+",sex:"+sex.toString()
+                +",searchType:"+requsetOption.searchType.toString()
+                +",searchSex:"+requsetOption.searchSex.toString()
+                +",message:"+requsetOption.message
+                +",date:"+requsetOption.date;
+        return  str;
     }
 }

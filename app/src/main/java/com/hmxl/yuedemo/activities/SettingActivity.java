@@ -11,7 +11,7 @@ import com.hmxl.yuedemo.R;
 
 import cn.bmob.v3.BmobUser;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends BaseActivity {
     private Button btn;
     public static final int LoginOut = 101;
 

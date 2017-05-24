@@ -8,11 +8,19 @@ import java.util.Date;
 
 public class RadarRequsetOption {
     public enum SearchType{
-        all,
-        run,
-        movie,
-        eat,
-        other
+        all(0), run(1), movie(2), eat(3), climb(4), travel(5), other(6);
+        private int index;
+        private SearchType(int index){
+            this.index = index;
+        }
+        public static SearchType getSearchType(int index){
+            SearchType type = SearchType.all;
+            for(SearchType s: SearchType.values()){
+                if(s.index == index)
+                    type = s;
+            }
+            return type;
+        }
     }
     public SearchType searchType;
     public String searchSex;
@@ -22,8 +30,8 @@ public class RadarRequsetOption {
     public RadarRequsetOption(){
         searchType = SearchType.all;
         searchSex = "all";
-        message = "";
-        date = "";
+        message = "nullmessage";
+        date = "nulldate";
     }
 
 }

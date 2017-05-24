@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity   {
                     @Override
                     public void done(Integer integer, BmobException e) {
                         if(e==null){//验证码发送成功
-                            Log.i("smile", "短信id："+integer);//用于查询本次短信发送详情
+                            Log.i(TAG, "短信id："+integer);//用于查询本次短信发送详情
                         }else{
                             MyLog.e(TAG,"send code failure",e);
                         }
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity   {
                     @Override
                     public void done(User user, BmobException e) {
                         if (user != null) {
-                            Log.i("smile", "用户登陆成功");
+                            Log.i(TAG, "用户登陆成功");
                             Intent intent = new Intent(LoginActivity.this, All_fragmment_Activity.class);
                             startActivity(intent);
                         }else{

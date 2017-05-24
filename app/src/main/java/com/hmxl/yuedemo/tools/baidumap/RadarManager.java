@@ -3,6 +3,7 @@ package com.hmxl.yuedemo.tools.baidumap;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.mapapi.map.MyLocationData;
@@ -34,10 +35,10 @@ public class RadarManager{
     //无需设置变量
     private static Context CurrentContext;
     private static RadarManager radarManager = null;
+    public static String separator = "~";
     private Handler handler_withUser;
     private Handler handler_withNullUser;
     private MyLocationData locationData;
-
     private RadarSearchListener radarSearchListener;
     private RadarUploadInfoCallback radarUploadInfoCallback;
 
@@ -123,14 +124,15 @@ public class RadarManager{
                 if (radarSearchError == RadarSearchError.RADAR_NO_ERROR) {
                     //上传成功
                     if(isUploadOnce){
-                        Toast.makeText(CurrentContext, "单次上传位置成功", Toast.LENGTH_SHORT)
+                        Toast.makeText(CurrentContext, "上传个人信息成功", Toast.LENGTH_LONG)
                                 .show();
                     }
                     requestUserInfo();
                 } else {
+                    Log.d(TAG,radarSearchError.toString());
                     //上传失败
                     if(isUploadOnce){
-                        Toast.makeText(CurrentContext, "单次上传位置失败", Toast.LENGTH_SHORT)
+                        Toast.makeText(CurrentContext, "上传个人信息失败", Toast.LENGTH_LONG)
                                 .show();
                     }
                 }
@@ -171,7 +173,8 @@ public class RadarManager{
         if(currentUser == null){
             requestUserInfoWithNullUser(handler);
         }else{
-            clear();
+            Log.d(TAG,"upload info:--"+currentUser.toString());
+            //clear();
             isUploadOnce = true;
             this.currentRadarUser = currentUser;
             userMarksList.clear();
@@ -182,24 +185,17 @@ public class RadarManager{
     }
 
     /**
-     * 开始自动上传
-     * @param currentRadarUser 可为null
+     * 不带用户的默认请求
+     * @param handler
      */
-//    public void uploadAuto(RadarUser currentRadarUser) {
-//        isUploadOnce = false;
-//        this.currentRadarUser = currentRadarUser;
-//        LocationManager.getInstance().requestLocation(handler_withUser);
-//    }
-
-    /**
-     * 停止自动上传
-     *
-     */
-//    public void stopUploadAuto() {
-//        isUploadOnce = true;
-//        this.currentRadarUser = null;
-//        RadarSearchManager.getInstance().stopUploadAuto();
-//    }
+    public void requestUserInfoWithNullUser(Handler handler){
+        //clear();
+        userMarksList.clear();
+        searchOption = getDefaultOption();
+        handler_result = handler;
+        currentRadarUser = null;
+        LocationManager.getInstance().requestLocation(handler_withNullUser);
+    }
 
     /**
      * 请求周边信息
@@ -209,17 +205,8 @@ public class RadarManager{
         RadarSearchManager.getInstance().nearbyInfoRequest(searchOption);
     }
 
-    /**
-     * 不带用户的默认请求
-     * @param handler
-     */
-    public void requestUserInfoWithNullUser(Handler handler){
-        clear();
-        userMarksList.clear();
-        searchOption = getDefaultOption();
-        handler_result = handler;
-        currentRadarUser = null;
-        LocationManager.getInstance().requestLocation(handler_withNullUser);
+    public RadarUser getRadaruser(){
+        return this.currentRadarUser;
     }
 
     /**
@@ -231,6 +218,13 @@ public class RadarManager{
         this.locationData = null;
         this.searchOption = null;
         this.handler_result = null;
+    }
+
+    /**
+     * 清除用户信息
+     */
+    public void clearUserInfo(){
+        clear();
         if(currentRadarUser != null){
             RadarSearchManager.getInstance().clearUserInfo();
             currentRadarUser = null;
@@ -245,6 +239,7 @@ public class RadarManager{
         CurrentContext = null;
         radarManager = null;
         clear();
+        clearUserInfo();
         //移除监听
         RadarSearchManager.getInstance().removeNearbyInfoListener(radarSearchListener);
         //释放资源
@@ -254,19 +249,19 @@ public class RadarManager{
     private String parseRadarUserToComment(RadarUser user){
         String string;
         if(user != null){
-            string = "name:" + user.name
-                    + ",sex:"+user.sex.toString()
-                    + ",searchType:"+user.requsetOption.searchType.toString()
-                    + ",searchSex:"+user.requsetOption.searchSex
-                    + ",message:" + user.requsetOption.message
-                    + ",date:"+user.requsetOption.date;
+            string = "name:" + user.name.trim()
+                    +separator+ "sex:"+user.sex.toString().trim()
+                    +separator+ "searchType:"+user.requsetOption.searchType.toString()
+                    +separator+ "searchSex:"+user.requsetOption.searchSex
+                    +separator+ "message:" + user.requsetOption.message.trim()
+                    +separator+ "date:"+user.requsetOption.date;
         }else{
-            string = "name:"
-                    +",sex:female"
-                    + ",searchType:all"
-                    + ",searchSex:all"
-                    + ",message:"
-                    + ",date:";
+            string = "name:无"
+                    +separator+ "sex:female"
+                    +separator+ "searchType:all"
+                    +separator+ "searchSex:all"
+                    +separator+ "message:无备注信息"
+                    +separator+ "date:无";
         }
         return string;
     }
@@ -274,21 +269,18 @@ public class RadarManager{
     private RadarUser parserCommentToRadarUser(String id,String comment){
         RadarUser user = new RadarUser();
         user.id = id;
-        String strs[] = comment.split(",");
+        if(id.equals("nullUser")){
+            return new RadarUser();
+        }
+        String strs[] = comment.split(separator);
 
-        user.name = strs[0].split(":")[1];
-
-        String sex = strs[1].split(":")[1];
-        user.sex = User.Sex.valueOf(sex);
-
-        String type = strs[2].split(":")[1];
-        user.requsetOption.searchType = RadarRequsetOption.SearchType.valueOf(type);
-
-        user.requsetOption.searchSex = strs[3].split(":")[1];
-
-        user.requsetOption.message = strs[4].split(":")[1];
-
-        user.requsetOption.date = strs[5].split(":")[1];
+        user.name = strs[0].substring(strs[0].indexOf(":")+1);
+        user.sex = User.Sex.valueOf(strs[1].substring(strs[1].indexOf(":")+1));
+        user.requsetOption.searchType = RadarRequsetOption.SearchType.valueOf(
+                strs[2].substring(strs[2].indexOf(":")+1));
+        user.requsetOption.searchSex = strs[3].substring(strs[3].indexOf(":")+1);
+        user.requsetOption.message = strs[4].substring(strs[4].indexOf(":")+1);
+        user.requsetOption.date = strs[5].substring(strs[5].indexOf(":")+1);
         return user;
     }
 
@@ -305,7 +297,7 @@ public class RadarManager{
                 .sortType(RadarNearbySearchSortType.time_from_recent_to_past)
                 .radius(1000)
                 .pageNum(0)
-                .timeRange(start,end)
+               // .timeRange(start,end)
         ;
         return  option;
     }
@@ -344,18 +336,80 @@ public class RadarManager{
     }
 
     private boolean isFit(RadarUser radarUser){
+        boolean b = false;
         if(radarUser.id.equals("nullUser")) {//无效用户信息
             return false;
         }
-        //TODO
-//        if(searchType == RadarRequsetOption.SearchType.all){
-//            return true;
-//        }else{
-//            if(radarUser.requsetOption.searchType == searchType){//筛选结果
-//                return true;
-//            }
-//            return false;
-//        }
-        return false;
+        if(currentRadarUser != null){//有当前用户
+            if(currentRadarUser.requsetOption.searchType == RadarRequsetOption.SearchType.all){//所有类型
+                if(!currentRadarUser.requsetOption.searchSex.equals("all")){//有性别筛选
+                    if(currentRadarUser.requsetOption.searchSex.equals("male")
+                            && radarUser.sex == User.Sex.male){
+                        if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                            //约会日期匹配
+                            b = true;
+                        }
+                    }else if(currentRadarUser.requsetOption.searchSex.equals("female")
+                            && radarUser.sex == User.Sex.female){
+                        if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                            //约会日期匹配
+                            b = true;
+                        }
+                    }
+                }else{//无性别筛选
+                    if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                        //约会日期匹配
+                        b = true;
+                    }
+                }
+            }else{//有类型筛选
+                if(currentRadarUser.requsetOption.searchType == radarUser.requsetOption.searchType){//有类型筛选
+                    if(!currentRadarUser.requsetOption.searchSex.equals("all")){//有性别筛选
+                        if(currentRadarUser.requsetOption.searchSex.equals("male")
+                                && radarUser.sex == User.Sex.male){
+                            if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                                //约会日期匹配
+                                b = true;
+                            }
+                        }else if(currentRadarUser.requsetOption.searchSex.equals("female")
+                                && radarUser.sex == User.Sex.female){
+                            if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                                //约会日期匹配
+                                b = true;
+                            }
+                        }
+                    }else{//无性别筛选
+                        if(currentRadarUser.requsetOption.date.equals(radarUser.requsetOption.date)){
+                            //约会日期匹配
+                            b = true;
+                        }
+                    }
+                }
+            }
+        }else{//当前用户为nullUser
+            b = true;
+        }
+        return b;
     }
+
+
+    /**
+     * 开始自动上传
+     * @param currentRadarUser 可为null
+     */
+//    public void uploadAuto(RadarUser currentRadarUser) {
+//        isUploadOnce = false;
+//        this.currentRadarUser = currentRadarUser;
+//        LocationManager.getInstance().requestLocation(handler_withUser);
+//    }
+
+    /**
+     * 停止自动上传
+     *
+     */
+//    public void stopUploadAuto() {
+//        isUploadOnce = true;
+//        this.currentRadarUser = null;
+//        RadarSearchManager.getInstance().stopUploadAuto();
+//    }
 }

@@ -2,11 +2,8 @@ package com.hmxl.yuedemo.db;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
 import com.hmxl.yuedemo.bean.User;
-
 import java.util.List;
-
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
@@ -91,8 +88,8 @@ public class UserManager {
      * @return user
      * @param objectid
      */
-    public User searchUserById(String objectid){
-        User user = new  User();
+    public void searchUserById(String objectid){
+       // User user = new  User();
         BmobQuery<User> bmobQuery = new BmobQuery<User>();
         bmobQuery.getObject(objectid, new QueryListener<User>() {
             @Override
@@ -104,7 +101,7 @@ public class UserManager {
                 }
             }
         });
-        return  user;
+     //   return  user;
     }
     /**
      * 根据备注查询好友,需要在个人信息表中添加备注(Remark),暂时在bmob中未添加

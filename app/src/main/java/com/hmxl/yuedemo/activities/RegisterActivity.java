@@ -61,7 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 finish();
                             }else {
                                 MyLog.e(TAG,"register failure",e);
-
                             }
                         }
                     });

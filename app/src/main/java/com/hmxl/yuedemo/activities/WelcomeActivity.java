@@ -23,8 +23,10 @@ public class WelcomeActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 //初试化
                 BmobUser bmobUser = BmobUser.getCurrentUser();
+
                 if(bmobUser!=null){
                     Intent intent = new Intent(WelcomeActivity.this,All_fragmment_Activity.class);
+                    intent.putExtra("index",1);
                     startActivity(intent);
                     finish();
                 }else{

@@ -3,6 +3,7 @@ package com.hmxl.yuedemo.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 
 public class LoginUsActivity extends AppCompatActivity {
+
+    private static String TAG = "LoginUsActivity";
 
     private Button btn_login;
     private Button btn_phone;
@@ -33,8 +36,9 @@ public class LoginUsActivity extends AppCompatActivity {
         int where = intent.getIntExtra("where",1);
         if(where == SettingActivity.LoginOut){
             isLoginOut = true;
+            ApplicationDemo.removeALLActivity_();
         }
-
+        MyLog.d(TAG,"展示LoginUs界面:"+isLoginOut);
         //初试化
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser!=null){
@@ -69,7 +73,7 @@ public class LoginUsActivity extends AppCompatActivity {
                             finish();
                         }else{
                             Toast.makeText(LoginUsActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
-                            MyLog.e("LoginUsActivity","login fail",e);
+                            MyLog.e(TAG,"login fail:",e);
                         }
                     }
                 });
@@ -90,8 +94,10 @@ public class LoginUsActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(isLoginOut)
-                System.exit(0);
+            if(isLoginOut){
+                Log.d(TAG,"程序退出");
+                ApplicationDemo.removeALLActivity_();
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

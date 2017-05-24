@@ -21,7 +21,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/tg"/>
     </FrameLayout>
 
@@ -38,16 +38,16 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/shape_rdbtn">
-        <RadioButton
-            android:id="@+id/rd_community"
-            android:gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="最近联系人"
-            android:drawableTop="@drawable/seletcor_rdbtn_community"
-            android:textColor="@drawable/selector_txt_color"
-            android:button="@null"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/rd_community"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="最近联系人"-->
+            <!--android:drawableTop="@drawable/seletcor_rdbtn_community"-->
+            <!--android:textColor="@drawable/selector_txt_color"-->
+            <!--android:button="@null"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content" />-->
         <RadioButton
             android:id="@+id/rd_message"
             android:gravity="center_horizontal"

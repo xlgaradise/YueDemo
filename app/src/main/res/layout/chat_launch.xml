@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#cccccc"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:id="@+id/ll_chat_launch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_avator"
+            android:layout_margin="10sp"
+            android:background="@mipmap/ic_launcher"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="20dp"
+                android:text="昵称"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_chat_launch"
+        android:text="发消息"
+        android:textSize="20dp"
+        android:textColor="#ffd"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
+
+
+    <Button
+        android:id="@+id/btn_add_friend"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_chat_video"
+        android:text="添加好友"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
+
+</LinearLayout>

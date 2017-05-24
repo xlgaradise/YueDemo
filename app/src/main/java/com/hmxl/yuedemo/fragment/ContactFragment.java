@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import com.hmxl.yuedemo.R;
 
 /**
+ * 最近联系人
  * A simple {@link Fragment} subclass.
  */
-public class CommunityFragment extends Fragment {
+public class ContactFragment extends Fragment {
 
 
-    public CommunityFragment() {
+    public ContactFragment() {
         // Required empty public constructor
     }
 

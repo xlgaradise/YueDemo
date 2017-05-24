@@ -13,12 +13,31 @@ public class User extends BmobUser {
         male,
         female
     }
+    // 新添加的第一处
+//    public User(NewFriend friend){
+//        setObjectId(friend.getUid());
+//        setUsername(friend.getName());
+//        setAvatar(friend.getAvatar());
+//
+//    }
+    // 新添加的第二处
+    private String avatar;
+    private BmobFile thumbnail;
     private String remark;
     private Boolean sex;
     private int  age;
     private String location;
     private String introduction;
-    private BmobFile thumbnail;
+    private boolean isFriend = false;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 
     public int getAge() {
         return age;
@@ -68,6 +87,11 @@ public class User extends BmobUser {
         this.introduction = introduction;
     }
 
+    public boolean isFriend() {
+        return isFriend;
+    }
 
-
+    public void setFriend(boolean friend) {
+        isFriend = friend;
+    }
 }

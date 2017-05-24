@@ -1,7 +1,8 @@
 package com.hmxl.yuedemo.fragment;
 
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +27,11 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.hmxl.yuedemo.R;
+import com.hmxl.yuedemo.activities.BaseActivity;
 import com.hmxl.yuedemo.bean.UserMarker;
 import com.hmxl.yuedemo.tools.baidumap.LocationManager;
 import com.hmxl.yuedemo.tools.baidumap.MapManager;
+import com.hmxl.yuedemo.tools.baidumap.RadarManager;
 
 import java.util.ArrayList;
 
@@ -44,6 +48,7 @@ public class MapFragment extends Fragment {
     BaiduMap baiduMap;
 
     ImageButton btn_location = null;
+    ImageButton btn_function = null;
     MyLocationData locationData;
     SensorManager mSensorManager;
     SensorEventListener sensorEventListener;
@@ -103,6 +108,8 @@ public class MapFragment extends Fragment {
                 if(msg.what == 1){//success
                     locationData = (MyLocationData) msg.obj;
                     //System.out.println(locationData.latitude+","+locationData.longitude);
+                    MapManager.getInstance().savePt(parentView.getContext(),
+                            new LatLng(locationData.latitude,locationData.longitude));
                     updateMap(locationData);
                 }else{
                     Toast.makeText(parentView.getContext(),"获取定位失败！",Toast.LENGTH_SHORT).show();
@@ -118,6 +125,15 @@ public class MapFragment extends Fragment {
                 btn_location.setImageResource(R.drawable.icon_map_location_normal);
                 LocationManager.getInstance().requestLocation(handler);
                 isRequestLocation = true;
+            }
+        });
+
+        btn_function = (ImageButton) parentView.findViewById(R.id.btn_function);
+        btn_function.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_function.setImageResource(R.drawable.icon_map_function_press);
+                MapManager.getInstance().showFunctionPopupWindow(parentView,btn_function);
             }
         });
 
@@ -178,7 +194,7 @@ public class MapFragment extends Fragment {
 
         //设置坐标点，缩放级别，俯仰角
         MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(point).overlook(-20).zoom(12);
+        builder.target(point).overlook(-20).zoom(17.5f);
 
         baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
@@ -195,6 +211,7 @@ public class MapFragment extends Fragment {
                 .zoom(17.5f);
         baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
+
 
     /**
      * 显示marks图标
@@ -243,5 +260,7 @@ public class MapFragment extends Fragment {
         super.onDestroyView();
         baiduMap.setMyLocationEnabled(false);
         mapView.onDestroy();
+        RadarManager.getInstance(getContext()).close();
     }
+
 }

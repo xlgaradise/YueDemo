@@ -92,7 +92,7 @@ public class GuideActivity extends AppCompatActivity {
 //                Intent intent = new Intent(GuideActivity.this, WelcomeActivity.class);
 //                startActivity(intent);
 //                finish();
-                Toast.makeText(GuideActivity.this,"暂未实现",Toast.LENGTH_SHORT).show();
+                Toast.makeText(GuideActivity.this,"静等更新",Toast.LENGTH_SHORT).show();
             }
         });
 

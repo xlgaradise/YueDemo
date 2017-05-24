@@ -4,19 +4,17 @@ package com.hmxl.yuedemo.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.map.Text;
+
 import com.hmxl.yuedemo.R;
-import com.hmxl.yuedemo.activities.AvatarActivity;
+
 import com.hmxl.yuedemo.activities.FriendManagerActivity;
 import com.hmxl.yuedemo.activities.SelfEditActivity;
 import com.hmxl.yuedemo.activities.SettingActivity;
@@ -53,34 +51,40 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         tv_friend_manager = (TextView) view.findViewById(R.id.my_tv_manage);
         imageView = (ImageView) view.findViewById(R.id.my_iv_image);
         tv_collect = (TextView) view.findViewById(R.id.my_tv_collect);
+        my_tv_name = (TextView) view.findViewById(R.id.my_tv_name);
         //添加事件
         tv_set.setOnClickListener(this);
         tv_edit.setOnClickListener(this);
         tv_friend_manager.setOnClickListener(this);
         imageView.setOnClickListener(this);
         tv_collect.setOnClickListener(this);
-        my_tv_name = (TextView) view.findViewById(R.id.my_tv_name);
 
-         String objectId = BmobUser.getCurrentUser().getObjectId();
-        //通过objectId获取到user的全部信息
-        BmobQuery<User> query = new BmobQuery<User>();
-        query.getObject(objectId, new QueryListener<User>() {
-            @Override
-            public void done(User user, BmobException e) {
-                if(e==null){
-                    //获得playerName的信息
-                    my_tv_name.setText(user.getRemark());
-                }else{
-                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+        BmobUser bmobUser = BmobUser.getCurrentUser();
+        if(bmobUser != null){
+            String objectId = bmobUser.getObjectId();
+            //通过objectId获取到user的全部信息
+            BmobQuery<User> query = new BmobQuery<User>();
+            query.getObject(objectId, new QueryListener<User>() {
+                @Override
+                public void done(User user, BmobException e) {
+                    if(e==null){
+                        //获得playerName的信息
+                        my_tv_name.setText(user.getRemark());
+                        if(user.getSex()){
+                            imageView.setImageResource(R.drawable.icon_map_male);
+                        }else{
+                            imageView.setImageResource(R.drawable.icon_map_female);
+                        }
+                    }else{
+                        my_tv_name.setText("");
+                        imageView.setImageResource(R.mipmap.ic_launcher);
+                        Log.d("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                    }
                 }
-            }
 
-        });
-
-
-
+            });
+        }
         return  view;
-
     }
 
     @Override

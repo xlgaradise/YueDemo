@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_chat_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="AAAAAAAA"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ListView
+            android:id="@+id/lv_chat_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:divider="#aaaaaa"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:dividerHeight="0px">
+        </ListView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_chat_add"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/chat_add_normal"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/edit_msg"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:hint="请输入新消息"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left|center"
+            />
+
+        <Button
+            android:id="@+id/btn_chat_send"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/icon_chat_send"
+            android:gravity="center" />
+    </LinearLayout>
+
+</LinearLayout>

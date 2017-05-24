@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.hmxl.yuedemo.R;
 
-public class FriendManagerActivity extends AppCompatActivity {
+public class FriendManagerActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

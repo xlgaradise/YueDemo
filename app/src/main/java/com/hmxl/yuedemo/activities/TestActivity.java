@@ -1,79 +1,118 @@
 package com.hmxl.yuedemo.activities;
 
-import android.content.Context;
+
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hmxl.yuedemo.R;
+import com.hmxl.yuedemo.bean.RadarRequsetOption;
+import com.hmxl.yuedemo.bean.RadarUser;
+import com.hmxl.yuedemo.bean.User;
+import com.hmxl.yuedemo.bean.UserMarker;
+import com.hmxl.yuedemo.fragment.MapFragment;
+import com.hmxl.yuedemo.tools.baidumap.MapManager;
+import com.hmxl.yuedemo.tools.baidumap.RadarManager;
+
+import java.util.ArrayList;
+
+/**
+ * Created by HPC on 2017/5/5.
+ */
 
 public class TestActivity extends AppCompatActivity {
+
+
+    MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_fragmment);
+        setContentView(R.layout.activity_main);
 
-        Button btn_show = (Button) findViewById(R.id.btn_menu);
 
-        btn_show.setOnClickListener(new View.OnClickListener() {
+        showMap();
+
+
+        Button btn_up = (Button) findViewById(R.id.btn_upinfo);
+        btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                showPopupWindow(v);
+            public void onClick(View view) {
+
+
+                RadarUser radarUser = new RadarUser();
+                //radarUser.id = "4b13902af6";
+                radarUser.id = "nullUser";
+                radarUser.sex = User.Sex.male;
+                radarUser.name = "erbi";
+                radarUser.requsetOption.searchType = RadarRequsetOption.SearchType.all;
+                radarUser.requsetOption.searchSex = "female";
+                radarUser.requsetOption.date = "2017-05-20";
+                radarUser.requsetOption.message = "我我我我我我我我 我我我 我我问问 我    我我我我我我我我我我我我 我我我 我我问问 我    我我我我我我我我我我我我 我我我 我我问问 我    我我我我";
+//                RadarManager.getInstance(getBaseContext()).uploadOnce(radarUser);
+
+                Handler handler = new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        //ArrayList<UserMarker> list = (ArrayList<UserMarker>)msg.obj;
+                        //MapManager.getInstance().showMarks(null,list);
+                    }
+                };
+                RadarManager.getInstance(getBaseContext())
+                        .uploadOnce(radarUser,handler);
+            }
+        });
+
+        Button btn_down = (Button) findViewById(R.id.btn_downinfo);
+        btn_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Handler handler = new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        ArrayList<UserMarker> list = (ArrayList<UserMarker>)msg.obj;
+                        MapManager.getInstance().showMarks(null,list);
+                    }
+                };
+                RadarManager.getInstance(getBaseContext())
+                        .requestUserInfoWithNullUser(handler);
+
+
+//                RadarManager.getInstance(getBaseContext()).requestUserInfo();
+            }
+        });
+
+        Button btn_clear = (Button) findViewById(R.id.btn_clearinfo);
+        btn_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RadarManager.getInstance(getBaseContext()).clear();
+                MapManager.getInstance().clearMarks(null);
             }
         });
     }
 
-    public void showPopupWindow(View view) {
-        final Context context = view.getContext();
-
-        // 一个自定义的布局，作为显示的内容
-        View contentView = LayoutInflater.from(context).inflate(R.layout.popwindow_menu, null);
-        // 设置按钮的点击事件
-//        Button button = (Button) contentView.findViewById(R.id.btn_show);
-//        button.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "button is pressed",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-//        TextView tv = (TextView) contentView.findViewById(R.id.txt_userID);
-//        tv.setText("userID: "+userMarker.getUserID());
-
-        final PopupWindow popupWindow = new PopupWindow(contentView,
-                300, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
 
-        popupWindow.setTouchable(true);
+    private void showMap(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft= fm.beginTransaction();
+        ft.add(R.id.fragment_map,MapManager.getInstance().createMapFragment(getBaseContext()));
+        ft.commit();
 
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                System.out.println("on touch");
-                return false;
-                // 这里如果返回true的话，touch事件将被拦截
-                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
-            }
-        });
-
-        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
-        popupWindow.setBackgroundDrawable(context.getResources()
-                .getDrawable(R.drawable.bg_filling));
-
-        // 设置好参数之后再show
-        popupWindow.showAtLocation(view, Gravity.TOP,390,200);
 
     }
+
+
+
+
+
 
 }
