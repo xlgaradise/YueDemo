@@ -29,6 +29,8 @@ import com.hmxl.yuedemo.bean.UserMarker;
 
 import java.util.ArrayList;
 
+import cn.bmob.v3.BmobUser;
+
 import static android.content.Context.MODE_PRIVATE;
 import static com.hmxl.yuedemo.activities.ApplicationDemo.SHAREDPREFERENCE_NAME;
 
@@ -272,11 +274,17 @@ public class MapManager {
 
             @Override
             public void onClick(View v) {
-                clearMarks(null);
-                userMarkersList.clear();
-                RadarManager.getInstance(context).clearUserInfo();
+
+                if(BmobUser.getCurrentUser() != null){
+                    clearMarks(null);
+                    userMarkersList.clear();
+                    RadarManager.getInstance(context).clearUserInfo(BmobUser.getCurrentUser().getObjectId());
+                }else{
+                    Toast.makeText(context,"当前没有用户",Toast.LENGTH_SHORT).show();
+                }
+
                 popupWindow.dismiss();
-                Toast.makeText(context,"信息已清除",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"信息已清除",Toast.LENGTH_SHORT).show();
             }
         });
 

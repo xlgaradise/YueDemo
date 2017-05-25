@@ -25,6 +25,8 @@ import com.hmxl.yuedemo.bean.UserMarker;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by HPC on 2017/5/15.
  */
@@ -44,7 +46,7 @@ public class RadarManager{
 
     //需设置
     private Handler handler_result;
-    private RadarUser currentRadarUser;
+    private static RadarUser currentRadarUser;
     private boolean isUploadOnce = true;
     private ArrayList<UserMarker> userMarksList;
     private RadarNearbySearchOption searchOption;
@@ -142,6 +144,7 @@ public class RadarManager{
             public void onGetClearInfoState(RadarSearchError radarSearchError) {
                 if (radarSearchError == RadarSearchError.RADAR_NO_ERROR) {
                     // 清除成功
+                    Toast.makeText(CurrentContext,"信息已清除",Toast.LENGTH_SHORT).show();
                 } else {
                     // 清除失败
                     Toast.makeText(CurrentContext, "清除个人位置信息失败", Toast.LENGTH_SHORT)
@@ -223,12 +226,12 @@ public class RadarManager{
     /**
      * 清除用户信息
      */
-    public void clearUserInfo(){
+    public void clearUserInfo(String id){
         clear();
-        if(currentRadarUser != null){
-            RadarSearchManager.getInstance().clearUserInfo();
-            currentRadarUser = null;
-        }
+        RadarSearchManager.getInstance().setUserID(id);
+        RadarSearchManager.getInstance().clearUserInfo();
+        currentRadarUser = null;
+
     }
 
 
