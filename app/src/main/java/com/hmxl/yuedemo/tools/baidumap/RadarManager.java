@@ -239,7 +239,6 @@ public class RadarManager{
         CurrentContext = null;
         radarManager = null;
         clear();
-        clearUserInfo();
         //移除监听
         RadarSearchManager.getInstance().removeNearbyInfoListener(radarSearchListener);
         //释放资源

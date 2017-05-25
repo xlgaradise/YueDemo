@@ -16,7 +16,7 @@
             android:background="#ffffff"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
-            android:text="切换账户"
+            android:text="切换账户(暂未实现)"
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="65dp" />
@@ -35,7 +35,7 @@
             android:id="@+id/tv_set_clear"
             android:layout_margin="20dp"
             android:textSize="15sp"
-            android:text="清空聊天记录"
+            android:text="清空聊天记录(暂未实现)"
             android:layout_width="270dp"
             android:layout_height="25dp" />
 
@@ -68,7 +68,7 @@
             android:id="@+id/tv_set_mute"
             android:layout_margin="20dp"
             android:textSize="15sp"
-            android:text="静音模式"
+            android:text="静音模式(暂未实现)"
             android:layout_width="270dp"
             android:layout_height="25dp" />
 

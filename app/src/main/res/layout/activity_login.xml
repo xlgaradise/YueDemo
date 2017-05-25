@@ -24,7 +24,7 @@
                     android:id="@+id/text"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:text="欢迎来到APP"
+                    android:text="欢迎来到Let's Date"
                     android:textSize="30dp"
                     android:textColor="#ffffff"
                     />
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="#51102153"
-                    android:text="用邮箱注册"
+                    android:text="用户名注册"
                     android:background="@drawable/bg_filling"/>
 
             </LinearLayout>
@@ -112,7 +112,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="------------第三方登录------------"
+                android:text="-------登录(微信、微博登录暂未实现)-------"
                 android:textColor="#51102153"/>
 
             <RadioGroup

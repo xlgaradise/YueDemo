@@ -58,7 +58,7 @@ public class BaseActivity extends AppCompatActivity {
             public void onChange(ConnectionStatus status) {
                 if(status == ConnectionStatus.DISCONNECT){
                     Log.d("BaseActivity","连接已断开");
-                    Toast.makeText(BaseActivity.this, "IM服务异常断开", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BaseActivity.this, "IM服务断开", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -81,5 +81,10 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(this,
                 "收到来自"+event.getConversation().getConversationTitle()+"的信息",
                 Toast.LENGTH_SHORT).show();
+    }
+
+
+    protected void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

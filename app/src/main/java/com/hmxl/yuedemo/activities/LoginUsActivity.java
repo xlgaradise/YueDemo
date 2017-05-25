@@ -16,6 +16,7 @@ import com.hmxl.yuedemo.tools.exception.MyLog;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class LoginUsActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class LoginUsActivity extends AppCompatActivity {
             isLoginOut = true;
             ApplicationDemo.removeALLActivity_();
         }
-        MyLog.d(TAG,"展示LoginUs界面:"+isLoginOut);
+        MyLog.d(TAG,"展示LoginUs界面: isLogOut:"+isLoginOut);
         //初试化
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser!=null){
@@ -46,6 +47,7 @@ public class LoginUsActivity extends AppCompatActivity {
             startActivity(intent1);
             finish();
         }
+
         btn_login = (Button) findViewById(R.id.log_pwd_btn_login);
         btn_phone = (Button) findViewById(R.id.log_pwd_btn_phone);
         et_account = (EditText) findViewById(R.id.login_account);
@@ -55,30 +57,37 @@ public class LoginUsActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              String user_account =   et_account.getText().toString().trim();
-              String user_pwd = et_pwd.getText().toString().trim();
+                String user_account = et_account.getText().toString().trim();
+                String user_pwd = et_pwd.getText().toString().trim();
+                if(user_account.equals("") || user_pwd.equals("")){
+                    showToast("用户名或密码不能为空");
+                    return;
+                }
                 BmobUser bmobUser= new BmobUser();
                 bmobUser.setUsername(user_account);
                 bmobUser.setPassword(user_pwd);
-                bmobUser.loginByAccount(user_account, user_pwd, new LogInListener<BmobUser>() {
+                bmobUser.login(new SaveListener<BmobUser>() {
                     @Override
                     public void done(BmobUser bmobUser, BmobException e) {
                         if(e==null){
-                            Toast.makeText(LoginUsActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                            //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
-                            //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
-                            //登陆成功后跳转到主界面
                             Intent intent = new Intent(LoginUsActivity.this,All_fragmment_Activity.class);
                             startActivity(intent);
                             finish();
                         }else{
-                            Toast.makeText(LoginUsActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
-                            MyLog.e(TAG,"login fail:",e);
+                            int errorCode = e.getErrorCode();
+                            if(errorCode == 101){//用户名或密码错误
+                                showToast("用户名或密码错误");
+                                return;
+                            }
+                            showToast("登录失败:"+errorCode);
+                            Log.e(TAG,"登录失败:"+errorCode+","+e.getMessage());
                         }
                     }
                 });
+
             }
         });
+
         btn_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,5 +109,9 @@ public class LoginUsActivity extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

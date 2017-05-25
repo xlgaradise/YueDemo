@@ -126,6 +126,7 @@ public class All_fragmment_Activity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 isMapTabSelected = false;
                 isFriendTabSelected = false;
+                btn_menu.setVisibility(View.VISIBLE);
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft= fm.beginTransaction();
                 if (checkedId==R.id.rd_message){
@@ -139,6 +140,7 @@ public class All_fragmment_Activity extends BaseActivity {
                         ft.replace(R.id.fg_container, requestInfoFragment);
                     }
                 }else if(checkedId == R.id.rd_mine){
+                    btn_menu.setVisibility(View.GONE);
                     ft.replace(R.id.fg_container, mineFragment);
                 }
 //                else if (checkedId==R.id.rd_community){

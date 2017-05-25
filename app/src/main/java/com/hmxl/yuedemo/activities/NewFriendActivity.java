@@ -37,7 +37,5 @@ public class NewFriendActivity extends BaseActivity {
     public void query(){
         adapter.addData(NewFriendManager.getInstance(this).getAllNewFriend());
         adapter.notifyDataSetChanged();
-
     }
-
 }

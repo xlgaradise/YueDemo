@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +18,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/my_iv_change_image"
+            android:id="@+id/iv_avatar_edit"
             android:layout_margin="10dp"
             android:background="@mipmap/ic_launcher"
             android:layout_width="60dp"
@@ -27,25 +26,26 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:layout_marginTop="25dp"
-                android:id="@+id/my_tv_nickname"
+                android:layout_marginTop="5dp"
+                android:id="@+id/my_tv_remark"
                 android:textSize="15dp"
-                android:hint="昵称"
+                android:hint="请填写昵称"
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <!--<TextView-->
-                <!--android:text="唯一标识"-->
-                <!--android:id="@+id/unique"-->
-                <!--android:textSize="15dp"-->
-                <!--android:background="@null"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:text="用户名："
+                android:id="@+id/my_tv_username"
+                android:layout_marginTop="15dp"
+                android:textSize="15dp"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -121,7 +121,7 @@
         <EditText
             android:inputType="number"
             android:id="@+id/et_user_age"
-            android:hint="22"
+            android:hint="请填写"
             android:textSize="15dp"
             android:layout_margin="3dp"
             android:background="@null"
@@ -154,7 +154,7 @@
 
         <EditText
             android:id="@+id/lv_user_region"
-            android:hint="河南省"
+            android:hint="请填写"
             android:textSize="15dp"
             android:layout_margin="3dp"
             android:background="@null"
@@ -191,7 +191,7 @@
             android:id="@+id/et_introduction"
             android:layout_margin="3dp"
             android:textSize="15dp"
-            android:hint="好好学习，天天向上"
+            android:hint="请填写"
             android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -127,11 +127,11 @@ public class GuideActivity extends AppCompatActivity {
                     if(positionOffset<0.95) {
                         btn_register.setVisibility(View.GONE);
                         btn_login.setVisibility(View.GONE);
-                        btn_tiyan.setVisibility(View.GONE);
+                        //btn_tiyan.setVisibility(View.GONE);
                     }else{
                         btn_register.setVisibility(View.VISIBLE);
                         btn_login.setVisibility(View.VISIBLE);
-                        btn_tiyan.setVisibility(View.VISIBLE);
+                        //btn_tiyan.setVisibility(View.VISIBLE);
                     }
                 }
             }

@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.hmxl.yuedemo.R;
 
-import com.hmxl.yuedemo.activities.FriendManagerActivity;
 import com.hmxl.yuedemo.activities.SelfEditActivity;
 import com.hmxl.yuedemo.activities.SettingActivity;
 import com.hmxl.yuedemo.bean.User;
@@ -34,7 +33,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView tv_friend_manager;
     private TextView tv_edit;
     private TextView tv_collect;
-    private TextView my_tv_name;
+    private TextView my_tv_remark;
+    private TextView my_tv_username;
+
     public MineFragment() {
         // Required empty public constructor
     }
@@ -46,12 +47,16 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         // 初始化
         View view = inflater.inflate(R.layout.activity_center_of_user, container, false);
-        tv_set = (TextView) view.findViewById(R.id.my_tv_systemset);
+
         tv_edit = (TextView) view.findViewById(R.id.my_tv_compile);
-        tv_friend_manager = (TextView) view.findViewById(R.id.my_tv_manage);
-        imageView = (ImageView) view.findViewById(R.id.my_iv_image);
         tv_collect = (TextView) view.findViewById(R.id.my_tv_collect);
-        my_tv_name = (TextView) view.findViewById(R.id.my_tv_name);
+        tv_friend_manager = (TextView) view.findViewById(R.id.my_tv_manage);
+        tv_set = (TextView) view.findViewById(R.id.my_tv_systemset);
+
+        imageView = (ImageView) view.findViewById(R.id.my_iv_image);
+        my_tv_remark = (TextView) view.findViewById(R.id.my_tv_remark);
+        my_tv_username = (TextView) view.findViewById(R.id.my_tv_username);
+
         //添加事件
         tv_set.setOnClickListener(this);
         tv_edit.setOnClickListener(this);
@@ -59,6 +64,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         imageView.setOnClickListener(this);
         tv_collect.setOnClickListener(this);
 
+        my_tv_remark.setText("昵称：");
+        my_tv_username.setText("用户名：");
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser != null){
             String objectId = bmobUser.getObjectId();
@@ -68,20 +75,19 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 @Override
                 public void done(User user, BmobException e) {
                     if(e==null){
-                        //获得playerName的信息
-                        my_tv_name.setText(user.getRemark());
-                        if(user.getSex()){
-                            imageView.setImageResource(R.drawable.icon_map_male);
-                        }else{
-                            imageView.setImageResource(R.drawable.icon_map_female);
+                        my_tv_remark.setText("昵称："+user.getRemark());
+                        my_tv_username.setText("用户名："+user.getUsername());
+                        if(user.getSex() != null){
+                            if (user.getSex()) {
+                                imageView.setImageResource(R.drawable.icon_map_male);
+                            } else {
+                                imageView.setImageResource(R.drawable.icon_map_female);
+                            }
                         }
                     }else{
-                        my_tv_name.setText("");
-                        imageView.setImageResource(R.mipmap.ic_launcher);
-                        Log.d("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                        Log.e("MineFragment","查询用户失败："+e.getMessage()+","+e.getErrorCode());
                     }
                 }
-
             });
         }
         return  view;
@@ -101,8 +107,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }
         else if(v.getId() == R.id.my_tv_manage){
             //好友管理
-            Intent intent = new Intent(getActivity(), FriendManagerActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(), FriendManagerActivity.class);
+//            startActivity(intent);
+            Toast.makeText(getActivity(),"静等更新",Toast.LENGTH_SHORT).show();
         }else if(v.getId() == R.id.my_tv_collect){
             //个性装扮
 //            Intent intent = new Intent(getActivity(), SettingActivity.class);

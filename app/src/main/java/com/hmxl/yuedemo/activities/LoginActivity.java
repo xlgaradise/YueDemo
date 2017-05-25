@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.hmxl.yuedemo.R;
 import com.hmxl.yuedemo.bean.User;
@@ -46,10 +47,12 @@ public class LoginActivity extends AppCompatActivity   {
         et_code = (EditText) findViewById(R.id.et_checkcode);
         et_number = (EditText) findViewById(R.id.et_number);
         rbtn_date= (RadioButton) findViewById(log_phone_rbtn_us);
+
         btn_code.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
                 phoneNumber = et_number.getText().toString().trim();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 BmobSMS.requestSMSCode(phoneNumber, "审核通过后的短信内容",new QueryListener<Integer>() {
@@ -57,8 +60,10 @@ public class LoginActivity extends AppCompatActivity   {
                     public void done(Integer integer, BmobException e) {
                         if(e==null){//验证码发送成功
                             Log.i(TAG, "短信id："+integer);//用于查询本次短信发送详情
+                            showToast("验证码发送成功");
                         }else{
-                            MyLog.e(TAG,"send code failure",e);
+                            MyLog.e(TAG,"验证码发送失败:",e);
+                            showToast("验证码发送失败:"+e.getErrorCode());
                         }
                     }
                 });
@@ -70,15 +75,25 @@ public class LoginActivity extends AppCompatActivity   {
             @Override
             public void onClick(View v) {
                 code = et_code.getText().toString().trim();
-                BmobUser.loginBySMSCode(phoneNumber, code, new LogInListener<User>() {
+                phoneNumber = et_number.getText().toString().trim();
+
+                BmobUser.signOrLoginByMobilePhone(phoneNumber,code,new LogInListener<User>() {
                     @Override
                     public void done(User user, BmobException e) {
                         if (user != null) {
-                            Log.i(TAG, "用户登陆成功");
                             Intent intent = new Intent(LoginActivity.this, All_fragmment_Activity.class);
                             startActivity(intent);
                         }else{
-                            MyLog.e(TAG,"login failure",e);
+                            if(e.getErrorCode() == 207){
+                                showToast("验证码错误");
+                                return;
+                            }
+                            else if(e.getErrorCode() == 301){
+                                showToast("手机号格式错误");
+                                return;
+                            }
+                            MyLog.e(TAG,"登录失败："+e.getErrorCode()+","+e.getMessage(),e);
+                            showToast("登录失败:"+e.getErrorCode());
                         }
                     }
                 });
@@ -103,6 +118,11 @@ public class LoginActivity extends AppCompatActivity   {
             }
         });
 
+    }
+
+
+    protected void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 

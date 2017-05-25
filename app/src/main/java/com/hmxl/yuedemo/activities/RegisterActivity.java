@@ -60,7 +60,26 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }else {
-                                MyLog.e(TAG,"register failure",e);
+                                int errorCode = e.getErrorCode();
+                                if(errorCode == 202){//用户名已存在
+                                    Toast.makeText(RegisterActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                else if(errorCode == 203){//邮箱已存在
+                                    Toast.makeText(RegisterActivity.this,"邮箱已存在",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                else if(errorCode == 301){
+                                    Toast.makeText(RegisterActivity.this,"邮箱格式错误",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                else if(errorCode == 304){
+                                    Toast.makeText(RegisterActivity.this,"用户名不能为空",Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                MyLog.e(TAG,"注册失败："+e.getErrorCode()+","+e.getMessage(),e);
+                                Toast.makeText(RegisterActivity.this,"注册失败:"+errorCode
+                                        ,Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
