@@ -232,7 +232,7 @@ public class All_fragmment_Activity extends BaseActivity {
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showIndex(1);
+                friendFragment.updateList();
                 popupWindow.dismiss();
             }
         });

@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_new_friend"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
-    tools:context="com.hmxl.yuedemo.activities.NewFriendActivity">
+    <Button
+        android:id="@+id/btn_friendsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_login_et"
+        android:textSize="16sp"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:text="搜索"/>
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey"/>
 
     <ListView
         android:id="@+id/listview"

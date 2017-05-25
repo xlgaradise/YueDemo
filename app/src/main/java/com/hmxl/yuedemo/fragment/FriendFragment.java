@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.hmxl.yuedemo.R;
 import com.hmxl.yuedemo.activities.ChatActivity;
+import com.hmxl.yuedemo.activities.NewFriendActivity;
 import com.hmxl.yuedemo.activities.SearchfriendActivity;
 import com.hmxl.yuedemo.adapter.UserListViewAdapter;
 import com.hmxl.yuedemo.bean.Friend;
@@ -57,12 +58,28 @@ public class FriendFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //点击后跳转到搜索界面
-                Intent intent = new Intent(getContext(), SearchfriendActivity.class);
+                Intent intent = new Intent(getContext(), NewFriendActivity.class);
                 startActivity(intent);
             }
         });
         adapter = new UserListViewAdapter(view.getContext());
 
+        updateList();
+        lv_friend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Friend friend =  adapter.getItem(position);
+                User user = friend.getFriendUser();
+                BmobIMManager.getInstance().goToChatActivity(getActivity(),user);
+            }
+        });
+
+        return view;
+
+    }
+
+    public void updateList(){
         // 获取当前用户的好友列表
         BmobQuery<Friend> query = new BmobQuery<Friend>();
         query.addWhereEqualTo("user",BmobUser.getCurrentUser());
@@ -81,18 +98,6 @@ public class FriendFragment extends Fragment {
                 }
             }
         });
-        lv_friend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Friend friend =  adapter.getItem(position);
-                User user = friend.getFriendUser();
-                BmobIMManager.getInstance().goToChatActivity(getActivity(),user);
-            }
-        });
-
-        return view;
-
     }
 
 

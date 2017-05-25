@@ -17,6 +17,7 @@ import com.hmxl.yuedemo.bmobMessage.AddFriendMessage;
 import com.hmxl.yuedemo.bmobMessage.BmobIMManager;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.bmob.newim.BmobIM;
@@ -26,8 +27,10 @@ import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.newim.core.BmobIMClient;
 import cn.bmob.newim.listener.MessageSendListener;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class FriendrequestActivity extends BaseActivity {
 
@@ -79,10 +82,26 @@ public class FriendrequestActivity extends BaseActivity {
         btn_add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //info = new BmobIMUserInfo(user.getObjectId(),user.getUsername(),null);
-                //System.out.println(user.getObjectId()+user.getUsername()+user.getAvatar());
-                BmobIMManager.getInstance().sendAddFriendMessage(getBaseContext(),
-                        user.getObjectId(),user.getUsername());
+                BmobQuery<Friend> query = new BmobQuery<Friend>();
+                query.addWhereEqualTo("user",BmobUser.getCurrentUser());
+                query.addWhereEqualTo("friendUser",user.getObjectId());
+                query.include("friendUser");
+                query.findObjects(new FindListener<Friend>() {
+                    @Override
+                    public void done(List<Friend> list, BmobException e) {
+                        if(e==null){
+                            if(list.size() == 0){
+                                BmobIMManager.getInstance().sendAddFriendMessage(getBaseContext(),
+                                        user.getObjectId(),user.getUsername());
+                            }else{
+                                showToast("已添加为好友");
+                            }
+                        }else{
+                            Log.e(TAG,"查询好友失败："+e.getErrorCode()+","+e.getMessage());
+                        }
+                    }
+                });
+
             }
         });
         btn_send.setOnClickListener(new View.OnClickListener() {
